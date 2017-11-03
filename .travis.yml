@@ -4,8 +4,8 @@ addons:
     - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ trusty main'
       key_url: 'https://dl.winehq.org/wine-builds/Release.key'
     packages:
-    # - $WINEHQ_VERSION # variables are defined after apt stage!
     - winehq-stable
+    # - $WINEHQ_VERSION # variables are defined after apt stage!
 before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
