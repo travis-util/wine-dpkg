@@ -3,8 +3,6 @@ env:
   - WINEHQ_VERSION=winehq-stable
   - WINEHQ_VERSION=winehq-staging
   - WINEHQ_VERSION=winehq-devel
-matrix:
-  allow_failures:
 addons:
   apt:
     sources:
