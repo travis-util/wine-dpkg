@@ -9,7 +9,7 @@ addons:
     # - wine #
     # - gcc-4.9
     # as requested by configure
-before_install::
+before_install:
 - apt-cache policy wine
 script:
 - true
