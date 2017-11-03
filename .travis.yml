@@ -1,0 +1,9 @@
+addons:
+  apt:
+    sources:
+    # - ubuntu-toolchain-r-test
+    - dl.winehq.org/wine-builds/ubuntu/
+    packages:
+    - wine #
+    # - gcc-4.9
+    # as requested by configure
