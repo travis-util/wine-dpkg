@@ -11,7 +11,8 @@ addons:
     # - gcc-4.9
     # as requested by configure
 before_install:
+- cat /etc/apt/sources.list
 - apt-cache policy wine
 script:
-- apt-cache policy wine
+- apt-cache policy wine winehq-stable
 - true
