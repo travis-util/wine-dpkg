@@ -1,16 +1,11 @@
-env:
-  matrix:
-  - WINEHQ_VERSION=winehq-stable
-  - WINEHQ_VERSION=winehq-staging
-  - WINEHQ_VERSION=winehq-devel
 addons:
   apt:
     sources:
     - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ trusty main'
       key_url: 'https://dl.winehq.org/wine-builds/Release.key'
     packages:
-    - $WINEHQ_VERSION
-    # - winehq-stable #
+    # - $WINEHQ_VERSION # variables are defined after apt stage!
+    - winehq-stable
 before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
