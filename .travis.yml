@@ -6,10 +6,10 @@ addons:
     # - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ trusty main'
       key_url: 'https://dl.winehq.org/wine-builds/Release.key'
     packages:
-    - wine #
+    # - wine #
     # - gcc-4.9
     # as requested by configure
-install:
+before_install::
 - apt-cache policy wine
 script:
 - true
