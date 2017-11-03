@@ -7,7 +7,7 @@ addons:
     - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ trusty main'
       key_url: 'https://dl.winehq.org/wine-builds/Release.key'
     packages:
-    # - wine #
+    - winehq-stable #
     # - gcc-4.9
     # as requested by configure
 before_install:
