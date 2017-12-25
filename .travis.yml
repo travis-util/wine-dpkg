@@ -13,6 +13,7 @@ before_install:
 - apt-cache policy wine winehq-stable
 - wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
 - unzip php*
+- wine php.exe --ini
 # PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
 - echo extension=php_openssl.dll >> php.ini
 - find . -name php_openssl.dll
@@ -29,7 +30,7 @@ before_install:
 - wine php.exe -r "unlink('composer-setup.php');"
 - wget https://getcomposer.org/composer.phar
 - wine php.exe composer.phar
-- wine php.exe composer.phar require symfony/lts
+- wine php.exe -c php.ini composer.phar require symfony/lts
 - ls --color
 script:
 - true
