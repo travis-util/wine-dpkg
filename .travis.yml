@@ -17,7 +17,9 @@ before_install:
 - find . -name php.ini-production
 # PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
 - echo extension_dir = "ext" >> php.ini
-- echo extension=php_openssl.dll >> php.ini
+# - echo extension=php_openssl.dll >> php.ini
+- echo extension=openssl >> php.ini
+- echo extension=mbstring >> php.ini
 - find . -name php_openssl.dll
 - wine php.exe --help
 # - wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
