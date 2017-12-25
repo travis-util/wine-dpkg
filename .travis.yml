@@ -14,6 +14,8 @@ before_install:
 - wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
 - unzip php*
 # PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
+- echo extension=php_openssl.dll >> php.ini
+- find . -name php_openssl.dll
 - wine php.exe --help
 # - wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 # Warning: copy(): Unable to find the wrapper "https" - did you forget to enable it when you configured PHP?
@@ -26,7 +28,8 @@ before_install:
 # If possible you should enable it or recompile php with --with-openssl
 - wine php.exe -r "unlink('composer-setup.php');"
 - wget https://getcomposer.org/composer.phar
-- ls --color
 - wine php.exe composer.phar
+- wine php.exe composer.phar require symfony/lts
+- ls --color
 script:
 - true
