@@ -40,7 +40,7 @@ before_install:
 - cat composer.json
 - file vendor/bin/phpunit
 - cat vendor/bin/phpunit
-- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit"
-- wine "vendor\bin\phpunit"
+- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --version
+- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --help
 script:
 - true
