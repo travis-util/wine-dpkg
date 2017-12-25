@@ -32,7 +32,9 @@ before_install:
 - wine php.exe -r "unlink('composer-setup.php');"
 - wget https://getcomposer.org/composer.phar
 - wine php.exe composer.phar
-- wine php.exe -c php.ini composer.phar require symfony/lts
+# - wine php.exe -c php.ini composer.phar require symfony/lts
+- wine php.exe -c php.ini composer.phar require phpunit/phpunit
 - ls --color
+- cat composer.json
 script:
 - true
