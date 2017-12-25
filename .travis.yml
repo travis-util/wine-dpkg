@@ -13,8 +13,10 @@ before_install:
 - apt-cache policy wine winehq-stable
 - wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
 - unzip php*
+# PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
 - wine php.exe --help
 # - wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+# Warning: copy(): Unable to find the wrapper "https" - did you forget to enable it when you configured PHP?
 - wget https://getcomposer.org/installer --output-document=composer-setup.php
 - wine php.exe -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 # - wine php.exe composer-setup.php
@@ -28,4 +30,3 @@ before_install:
 - wine php.exe composer.phar
 script:
 - true
-- wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
