@@ -12,4 +12,6 @@ before_install:
 - apt-cache policy wine
 script:
 - apt-cache policy wine winehq-stable
-- true
+- wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
+- unzip php*
+- ls php
