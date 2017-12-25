@@ -38,6 +38,8 @@ before_install:
 - wine php.exe -c php.ini composer.phar require phpunit/phpunit
 - ls --color
 - cat composer.json
+- file vendor/bin/phpunit
+- cat vendor/bin/phpunit
 - wine "vendor\bin\phpunit"
 script:
 - true
