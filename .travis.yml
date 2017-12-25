@@ -24,8 +24,8 @@ before_install:
 # If possible you should enable it or recompile php with --with-openssl
 - wine php.exe -r "unlink('composer-setup.php');"
 - wget https://getcomposer.org/composer.phar
-- ls
-- wine composer.phar
+- ls --color
+- wine php.exe composer.phar
 script:
 - true
 - wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
