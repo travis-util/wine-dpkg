@@ -9,11 +9,16 @@ addons:
 before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
-- apt-cache policy wine winehq-stable
+# - apt-cache policy wine winehq-stable # speedup
+
+- wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+- wine nuget.exe
+
+# Tentative to download PowerShell using unzip or 7z
+
 # - wget http://www.7-zip.org/a/7z1604-x64.exe
 # - wine 7z1604-x64.exe # Seems to need graphical display.
 
-# Tentative to download PowerShell
 # Commented out to spped up
 # - wget https://downloads.sourceforge.net/project/sevenzip/7-Zip/9.20/7za920.zip # Popular old version
 # - unzip 7za*.zip
