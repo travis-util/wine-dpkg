@@ -10,7 +10,14 @@ before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
 # - apt-cache policy wine winehq-stable # speedup
-- ls -l --color ~/.wine
+
+- install --directory ~/.wine/drive_c/windows
+- install --directory ~/.wine/dosdevices
+- pushd ~/.wine/dosdevices
+- ln -s ../drive_c c:
+- ln -s / z:
+- ls -l --color
+- popd
 
 - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 - wine nuget.exe
