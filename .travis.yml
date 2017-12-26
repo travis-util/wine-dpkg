@@ -10,6 +10,7 @@ before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
 # - apt-cache policy wine winehq-stable # speedup
+- ls -l --color ~/.wine
 
 - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 - wine nuget.exe
