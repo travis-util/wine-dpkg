@@ -19,7 +19,7 @@ before_install:
 - ls -l --color
 - popd
 - wine cmd.exe /C dir
-- wine cmd.exe /C dir C:
+- wine cmd.exe /C dir C:\\
 - wine cmd.exe /C dir Z:\\
 - wine cmd.exe /C dir "%HOMEDRIVE%%HOMEPATH%"
 
