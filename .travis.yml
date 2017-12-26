@@ -18,6 +18,10 @@ before_install:
 - ln -s / 'z:'
 - ls -l --color
 - popd
+- wine dir
+- wine dir C:\
+- wine dir Z:\
+- wine dir "%HOMEDRIVE%%HOMEPATH%"
 
 - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 - wine nuget.exe
