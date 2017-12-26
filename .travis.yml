@@ -10,6 +10,8 @@ before_install:
 - ls --color /etc/apt
 - cat /etc/apt/sources.list
 - apt-cache policy wine winehq-stable
+- wget http://www.7-zip.org/a/7z1604-x64.exe
+- wine 7z1604-x64.exe
 - wget https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-rc.2/PowerShell-6.0.0-rc.2-win-x64.zip
 - unzip PowerShell*
 - wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
