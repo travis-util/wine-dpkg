@@ -15,8 +15,10 @@ before_install:
 - wget https://downloads.sourceforge.net/project/sevenzip/7-Zip/9.20/7za920.zip
 - unzip 7za*.zip
 # ?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fsevenzip%2Ffiles%2F7-Zip%2F9.20%2F7za920.zip%2Fdownload&ts=1514293966"
+- cat readme.txt
+- wine 7za.exe
 - wget https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-rc.2/PowerShell-6.0.0-rc.2-win-x64.zip
-- unzip PowerShell*
+- wine 7za.exe e PowerShell*
 - wget http://windows.php.net/downloads/releases/php-7.2.0-nts-Win32-VC15-x64.zip
 - unzip php*
 - wine php.exe --ini
