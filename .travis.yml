@@ -15,7 +15,7 @@ before_install:
 - install --directory ~/.wine/dosdevices
 - pushd ~/.wine/dosdevices
 - ln -s ../drive_c 'c\:'
-- ln -s / z\:
+- ln -s / 'z\:'
 - ls -l --color
 - popd
 
