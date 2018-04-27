@@ -53,9 +53,9 @@ before_install:
 - php_version=$(git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.2.*')
 - popd
 
-
-- wget --no-verbose https://windows.php.net/downloads/releases/${php_version}-nts-Win32-VC15-x64.zip
-- unzip php*
+- php_zip=${php_version}-nts-Win32-VC15-x64.zip
+- wget --quiet https://windows.php.net/downloads/releases/$php_zip
+- unzip $php_zip
 - wine php.exe --ini
 - find . -name php.ini-production
 # PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
