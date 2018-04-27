@@ -50,10 +50,11 @@ before_install:
 - git tag --list 'php-*' --sort=taggerdate | tail -4
 - git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-*'
 - git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.*'
+- php_version=$(git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.2.*')
 - popd
 
 
-- wget --no-verbose https://windows.php.net/downloads/releases/$(git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.2.*')-nts-Win32-VC15-x64.zip
+- wget --no-verbose https://windows.php.net/downloads/releases/${php_version}-nts-Win32-VC15-x64.zip
 - unzip php*
 - wine php.exe --ini
 - find . -name php.ini-production
