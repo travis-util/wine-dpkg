@@ -73,9 +73,10 @@ after_script:
 - file vendor/bin/phpunit
 - cat vendor/bin/phpunit
 - wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --version
-- wine php.exe -c php.ini composer.phar exec -- phpunit --version
+- wine php.exe -c php.ini composer.phar exec -- phpunit --version # Not working!
 - wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --help
-- wine php.exe -c php.ini composer.phar exec -- phpunit --help
+- wine php.exe -c php.ini composer.phar exec -- phpunit --help # Not working!
+- wine php.exe -c php.ini composer.phar exec phpunit
 
 # - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 # - wine nuget.exe # Requires missing mono.
