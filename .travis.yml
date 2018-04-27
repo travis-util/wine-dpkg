@@ -6,11 +6,8 @@ addons:
     packages:
     - winehq-stable
     # - $WINEHQ_VERSION # variables are defined after apt stage!
-before_install:
-- ls --color /etc/apt
-- cat /etc/apt/sources.list
-# - apt-cache policy wine winehq-stable # speedup
 
+before_install:
 - install --directory ~/.wine/drive_c/windows
 - install --directory ~/.wine/dosdevices
 - pushd ~/.wine/dosdevices
@@ -19,10 +16,66 @@ before_install:
 - ls -l --color
 - popd
 - wine wineboot
+
+- git clone git://github.com/php/php-src.git
+- pushd php-src
+- php_version=$(git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.2.*')
+- popd
+- php_zip=${php_version}-nts-Win32-VC15-x64.zip
+- wget --quiet https://windows.php.net/downloads/releases/$php_zip
+- unzip $php_zip
+
+# PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
+- echo extension_dir = "ext" >> php.ini
+- echo extension=openssl >> php.ini
+- echo extension=mbstring >> php.ini
+
+- wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+## Warning: copy(): Unable to find the wrapper "https" - did you forget to enable it when you configured PHP?
+#- wget https://getcomposer.org/installer --output-document=composer-setup.php
+- wine php.exe -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+- wine php.exe composer-setup.php
+## Some settings on your machine make Composer unable to work properly.
+# Make sure that you fix the issues listed below and run this script again:
+# The openssl extension is missing, which means that secure HTTPS transfers are impossible.
+# If possible you should enable it or recompile php with --with-openssl
+- wine php.exe -r "unlink('composer-setup.php');"
+# - wget https://getcomposer.org/composer.phar
+
+- wine php.exe -c php.ini composer.phar require phpunit/phpunit
+
+script: true
+
+after_script:
+# - apt-cache policy wine winehq-stable # speedup
+- ls --color /etc/apt
+- cat /etc/apt/sources.list
 - wine cmd.exe /C dir
 - wine cmd.exe /C dir C:\\
 - wine cmd.exe /C dir Z:\\
 - wine cmd.exe /C dir "%HOMEDRIVE%%HOMEPATH%"
+
+- pushd php-src
+- git show-branch
+- git tag --list 'php-*' --sort=taggerdate | tail -4
+- git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-*'
+- git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.*'
+- popd
+
+- wine php.exe --ini
+- wine php.exe --help
+- find . -name php.ini-production
+- find . -name php_openssl.dll
+
+- wine php.exe composer.phar
+- ls --color
+- cat composer.json
+- file vendor/bin/phpunit
+- cat vendor/bin/phpunit
+- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --version
+- wine php.exe -c php.ini composer.phar exec phpunit --version
+- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --help
+- wine php.exe -c php.ini composer.phar exec phpunit --help
 
 # - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 # - wine nuget.exe # Requires missing mono.
@@ -44,46 +97,3 @@ before_install:
 # - wine 7za.exe x PowerShell* # can not open output file
 # unzip had also an error for \ Windows style dirrectory separator
 
-- git clone git://github.com/php/php-src.git
-- pushd php-src
-- git show-branch
-- git tag --list 'php-*' --sort=taggerdate | tail -4
-- git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-*'
-- git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.*'
-- php_version=$(git for-each-ref --count=1 --sort=-taggerdate --format '%(tag)' 'refs/tags/php-7.2.*')
-- popd
-
-- php_zip=${php_version}-nts-Win32-VC15-x64.zip
-- wget --quiet https://windows.php.net/downloads/releases/$php_zip
-- unzip $php_zip
-- wine php.exe --ini
-- find . -name php.ini-production
-# PHP is not configured and, for instance, SSL is not working, this should be done in php.ini
-- echo extension_dir = "ext" >> php.ini
-- echo extension=openssl >> php.ini
-- echo extension=mbstring >> php.ini
-- find . -name php_openssl.dll
-- wine php.exe --ini
-- wine php.exe --help
-- wine php.exe -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-## Warning: copy(): Unable to find the wrapper "https" - did you forget to enable it when you configured PHP?
-#- wget https://getcomposer.org/installer --output-document=composer-setup.php
-- wine php.exe -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-- wine php.exe composer-setup.php
-## Some settings on your machine make Composer unable to work properly.
-# Make sure that you fix the issues listed below and run this script again:
-# The openssl extension is missing, which means that secure HTTPS transfers are impossible.
-# If possible you should enable it or recompile php with --with-openssl
-- wine php.exe -r "unlink('composer-setup.php');"
-# - wget https://getcomposer.org/composer.phar
-- wine php.exe composer.phar
-# - wine php.exe -c php.ini composer.phar require symfony/lts
-- wine php.exe -c php.ini composer.phar require phpunit/phpunit
-- ls --color
-- cat composer.json
-- file vendor/bin/phpunit
-- cat vendor/bin/phpunit
-- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --version
-- wine php.exe -c php.ini "vendor\phpunit\phpunit\phpunit" --help
-script:
-- true
