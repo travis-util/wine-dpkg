@@ -83,7 +83,9 @@ after_script:
 - wine cmd.exe /C php --version
 - wine cmd.exe /C php -c php.ini composer.phar --version
 - wine cmd.exe /C php -c php.ini composer.phar
+- wine cmd.exe /C php -c php.ini composer.phar exec phpunit -- --version
 - wine cmd.exe /C php -c php.ini composer.phar exec -- phpunit --version
+- wine cmd.exe /C php -c php.ini composer.phar exec phpunit -- --help
 - wine cmd.exe /C php -c php.ini composer.phar exec -- phpunit --help
 
 
