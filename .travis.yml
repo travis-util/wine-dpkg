@@ -87,6 +87,7 @@ after_script:
 - wine cmd.exe /C php -c php.ini composer.phar exec -- phpunit --version
 - wine cmd.exe /C php -c php.ini composer.phar exec phpunit -- --help
 - wine cmd.exe /C php -c php.ini composer.phar exec -- phpunit --help
+- wine cmd.exe /C php -c php.ini composer.phar exec phpunit
 
 
 # - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
